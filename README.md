@@ -1,4 +1,4 @@
-* [中文版本](./README-zh.md)
+* [中文版本](./README_zh.md)
 # WeActStudio.STM32G431CoreBoard
 ![display](Images/0.png)
 STM32G431CBU6
