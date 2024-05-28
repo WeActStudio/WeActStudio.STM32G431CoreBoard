@@ -1,6 +1,7 @@
 * [English version](./README.md)
 # WeActStudio.STM32G431CoreBoard
 ![display](Images/0.png)
+![display](Images/1.png)
 STM32G431CBU6
 > 170Mhz Max,32KB RAM,128KB ROM
 
