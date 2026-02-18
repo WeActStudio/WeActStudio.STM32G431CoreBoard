@@ -14,11 +14,20 @@ extern "C"
 #ifndef KEY_GPIO_Port
 #define KEY_GPIO_Port GPIOC
 #endif
-#ifndef LED_Pin
+
+//#define STM32G431CxT6
+//#define STM32G431CxB6
+
+#if defined(STM32G431CxB6)
 #define LED_Pin GPIO_PIN_6
-#endif
-#ifndef LED_GPIO_Port
 #define LED_GPIO_Port GPIOC
+#define LED_GPIO_Port_CLK_ENABLE() __HAL_RCC_GPIOC_CLK_ENABLE()
+#elif defined(STM32G431CxT6)
+#define LED_Pin GPIO_PIN_8
+#define LED_GPIO_Port GPIOA
+#define LED_GPIO_Port_CLK_ENABLE() __HAL_RCC_GPIOA_CLK_ENABLE()
+#else
+#error "STM32G431CxB6 or STM32G431CxT6 need defined"
 #endif
 
     void board_button_init(void);

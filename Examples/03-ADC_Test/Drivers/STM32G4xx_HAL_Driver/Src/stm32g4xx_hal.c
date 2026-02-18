@@ -48,11 +48,11 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /**
-  * @brief STM32G4xx HAL Driver version number V1.2.2
+  * @brief STM32G4xx HAL Driver version number V1.2.5
   */
 #define __STM32G4xx_HAL_VERSION_MAIN   (0x01U) /*!< [31:24] main version */
 #define __STM32G4xx_HAL_VERSION_SUB1   (0x02U) /*!< [23:16] sub1 version */
-#define __STM32G4xx_HAL_VERSION_SUB2   (0x02U) /*!< [15:8]  sub2 version */
+#define __STM32G4xx_HAL_VERSION_SUB2   (0x05U) /*!< [15:8]  sub2 version */
 #define __STM32G4xx_HAL_VERSION_RC     (0x00U) /*!< [7:0]  release candidate */
 #define __STM32G4xx_HAL_VERSION         ((__STM32G4xx_HAL_VERSION_MAIN << 24U)\
                                          |(__STM32G4xx_HAL_VERSION_SUB1 << 16U)\
@@ -378,7 +378,8 @@ HAL_StatusTypeDef HAL_SetTickFreq(uint32_t Freq)
 
 /**
   * @brief Returns tick frequency.
-  * @retval tick period in Hz
+  * @retval Tick frequency.
+  *         Value of @ref HAL_TickFreqTypeDef.
   */
 uint32_t HAL_GetTickFreq(void)
 {
@@ -469,6 +470,33 @@ uint32_t HAL_GetREVID(void)
 uint32_t HAL_GetDEVID(void)
 {
   return (DBGMCU->IDCODE & DBGMCU_IDCODE_DEV_ID);
+}
+
+/**
+  * @brief  Return the first word of the unique device identifier (UID based on 96 bits)
+  * @retval Device identifier
+  */
+uint32_t HAL_GetUIDw0(void)
+{
+  return (READ_REG(*((uint32_t *)UID_BASE)));
+}
+
+/**
+  * @brief  Return the second word of the unique device identifier (UID based on 96 bits)
+  * @retval Device identifier
+  */
+uint32_t HAL_GetUIDw1(void)
+{
+  return (READ_REG(*((uint32_t *)(UID_BASE + 4U))));
+}
+
+/**
+  * @brief  Return the third word of the unique device identifier (UID based on 96 bits)
+  * @retval Device identifier
+  */
+uint32_t HAL_GetUIDw2(void)
+{
+  return (READ_REG(*((uint32_t *)(UID_BASE + 8U))));
 }
 
 /**
@@ -566,7 +594,6 @@ void HAL_DBGMCU_DisableDBGStandbyMode(void)
 @endverbatim
   * @{
   */
-
 /**
   * @brief  Start a hardware CCMSRAM erase operation.
   * @note   As long as CCMSRAM is not erased the CCMER bit will be set.
@@ -739,7 +766,6 @@ void HAL_SYSCFG_DisableIOSwitchVDD(void)
   CLEAR_BIT(SYSCFG->CFGR1, SYSCFG_CFGR1_ANASWVDD);
 }
 
-
 /** @brief  CCMSRAM page write protection enable
   * @param Page: This parameter is a long 32bit value and can be a value of @ref SYSCFG_CCMSRAMWRP
   * @note   write protection can only be disabled by a system reset
@@ -751,7 +777,6 @@ void HAL_SYSCFG_CCMSRAM_WriteProtectionEnable(uint32_t Page)
 
   SET_BIT(SYSCFG->SWPR, (uint32_t)(Page));
 }
-
 
 /**
   * @}

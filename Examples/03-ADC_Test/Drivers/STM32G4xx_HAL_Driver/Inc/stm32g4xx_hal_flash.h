@@ -410,7 +410,6 @@ typedef struct
 /**
   * @}
   */
-
 /** @defgroup FLASH_OB_USER_CCMSRAM_RST FLASH Option Bytes User CCMSRAM Erase On Reset Type
   * @{
   */
@@ -419,7 +418,6 @@ typedef struct
 /**
   * @}
   */
-
 /** @defgroup FLASH_OB_USER_nSWBOOT0 FLASH Option Bytes User Software BOOT0
   * @{
   */
@@ -873,7 +871,8 @@ HAL_StatusTypeDef  FLASH_WaitForLastOperation(uint32_t Timeout);
 #define FLASH_SIZE                      ((((*((uint16_t *)FLASH_SIZE_DATA_REGISTER)) == 0xFFFFU)) ? (0x200UL << 10U) : \
                                         (((*((uint32_t *)FLASH_SIZE_DATA_REGISTER)) & 0xFFFFUL) << 10U))
 #define FLASH_BANK_SIZE                 (FLASH_SIZE >> 1)
-#define FLASH_PAGE_NB                   128U
+#define FLASH_PAGE_NB                   ((FLASH_SIZE == 0x00080000U) ? 128U : \
+                                        ((FLASH_SIZE == 0x00040000U) ? 64U : 32U))
 #define FLASH_PAGE_SIZE_128_BITS        0x1000U /* 4 KB */
 #else
 #define FLASH_SIZE                      ((((*((uint16_t *)FLASH_SIZE_DATA_REGISTER)) == 0xFFFFU)) ? (0x80UL << 10U) : \
@@ -973,6 +972,7 @@ HAL_StatusTypeDef  FLASH_WaitForLastOperation(uint32_t Timeout);
 #define IS_OB_USER_BOOT1(VALUE)            (((VALUE) == OB_BOOT1_SRAM) || ((VALUE) == OB_BOOT1_SYSTEM))
 
 #define IS_OB_USER_SRAM_PARITY(VALUE)      (((VALUE) == OB_SRAM_PARITY_ENABLE) || ((VALUE) == OB_SRAM_PARITY_DISABLE))
+
 
 #define IS_OB_USER_CCMSRAM_RST(VALUE)      (((VALUE) == OB_CCMSRAM_RST_ERASE) || ((VALUE) == OB_CCMSRAM_RST_NOT_ERASE))
 

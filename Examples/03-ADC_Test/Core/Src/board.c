@@ -33,7 +33,7 @@ void board_led_init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
+  LED_GPIO_Port_CLK_ENABLE();
   
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
