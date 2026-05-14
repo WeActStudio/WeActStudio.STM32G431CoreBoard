@@ -25,4 +25,5 @@ del *.htm /s
 del *.sct /s
 del *.map /s
 del *.mxproject /s
+del *.axf /s
 exit

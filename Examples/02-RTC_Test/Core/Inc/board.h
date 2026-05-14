@@ -16,9 +16,9 @@ extern "C"
 #endif
 
 //#define STM32G431CxT6
-//#define STM32G431CxB6
+//#define STM32G431CxU6
 
-#if defined(STM32G431CxB6)
+#if defined(STM32G431CxU6)
 #define LED_Pin GPIO_PIN_6
 #define LED_GPIO_Port GPIOC
 #define LED_GPIO_Port_CLK_ENABLE() __HAL_RCC_GPIOC_CLK_ENABLE()
